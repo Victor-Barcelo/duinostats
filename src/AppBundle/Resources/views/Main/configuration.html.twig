@@ -1,0 +1,148 @@
+{% extends 'AppBundle:Main:layout.html.twig' %}
+
+{% block title %}DuinoStats: Configuración{% endblock %}
+
+{% block head %}
+    <script src="{{ asset('bundles/app/js/vendor/pnotify.custom.min.js') }}"></script>
+    <link href="{{ asset( 'bundles/app/css/vendor/pnotify.custom.min.css') }} " type="text/css" rel="stylesheet "/>
+    <link href="{{ asset( 'bundles/app/css/configuration.css') }} " type="text/css" rel="stylesheet "/>
+    <script src="{{ asset('bundles/app/js/configure.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+
+    <div class="center-block">
+        <div class="container-fluid main-section">
+            <div class="row">
+
+                <!-- Panel: Configuración de sensores y alertas -->
+                <div class="col-md-offset-1 col-md-4 main">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Configuración de sensores y alertas</div>
+                        <div class="panel-body ">
+                            <div id="sensor-config" style="min-width: 400px; margin: 0 auto">
+
+                                <form class="form-horizontal">
+                                    <fieldset>
+
+                                        <!-- Text input-->
+                                        <div class="control-group">
+                                            <label class="control-label" for="temp-limit">Valor de límite superior de temperatura</label>
+                                            <div class="controls">
+                                                <input id="temp-limit" name="temp-limit" type="text" value="{{ configData.temperatureLimit }}" class="input-medium">
+                                            </div>
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="control-group">
+                                            <label class="control-label" for="light-limit">Valor de límite superior de luminosidad</label>
+                                            <div class="controls">
+                                                <input id="light-limit" name="light-limit" type="text" value="{{ configData.lightLimit }}" class="input-medium">
+                                            </div>
+                                        </div>
+                                        <!-- Select Basic -->
+                                        <div class="control-group">
+                                            <label class="control-label" for="notify-email">Notificar alertas por email</label>
+                                            <div class="controls">
+                                                <select id="notify-email" name="notify-email" class="input-medium">
+                                                    <option {% if configData.emailNotify == "1" %}selected="selected"{% endif %}>Sí</option>
+                                                    <option {% if configData.emailNotify == "0" %}selected="selected"{% endif %}>No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Select Basic -->
+                                        <div class="control-group">
+                                            <label class="control-label" for="notify-twitter">Notificar alertas por twitter (@vb_notifier)</label>
+                                            <div class="controls">
+                                                <select id="notify-twitter" name="notify-twitter" class="input-medium">
+                                                    <option {% if configData.twitterNotify == "1" %}selected="selected"{% endif %}>Sí</option>
+                                                    <option {% if configData.twitterNotify == "0" %}selected="selected"{% endif %}>No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="panel-footer clearfix">
+                            <button type="button" id ="save-options" class="btn btn-primary save-btn pull-right">Guardar cambios</button>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+                <!-- Panel: Lista de emails a notificar en caso de alerta -->
+                <div class="col-md-6 main">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading clearfix">
+                            <span>Lista de emails a notificar en caso de alerta</span>
+
+                            <div class="pull-right">
+                                <a href="#" id="create-email" class="btn btn-default btn-xs">Insertar nuevo email</a>
+                            </div>
+                        </div>
+                        <div class="panel-body" style="overflow-y: scroll;">
+                            <div id="email-config" style="min-width: 400px; height: 254px; margin: 0 auto">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for email in emails %}
+                                        <tr>
+                                            <td>{{ email.email }}</td>
+                                            <td><a href="#" class="edit-email" data-id="{{ email.id }}"
+                                                   data-email="{{ email.email }}">editar</a></td>
+                                            <td><a href="{{ path('email_delete', { 'id': email.id }) }}">eliminar</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="email-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Introduce email</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <!-- Email input-->
+                        <div class="form-group email">
+                            <label class="col-md-2 control-label" for="textinput">Email</label>
+
+                            <div class="col-md-8">
+                                <input name="textinput" type="email" placeholder=""
+                                       class="form-control input-md email-input">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary save-btn">Guardar cambios</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

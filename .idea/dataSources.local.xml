@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - vbnet - duinostats" uuid="f956446c-3dad-44ea-af73-7f2cd57e05a5">
+      <secret-storage>master_key</secret-storage>
+      <user-name>victorba_duinost</user-name>
+      <schema-pattern>victorba_duinostats.*</schema-pattern>
+      <default-schemas>victorba_duinostats.*</default-schemas>
+    </data-source>
+  </component>
+</project>

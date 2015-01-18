@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'AppBundle:Main:head.html.twig' %}
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+<header>
+    {% include 'AppBundle:Main:header.html.twig' %}
+</header>
+
+<main>
+    {% block main %}{% endblock %}
+</main>
+
+<footer>
+</footer>
+
+</body>
+
+</html>

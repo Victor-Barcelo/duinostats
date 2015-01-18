@@ -1,0 +1,13 @@
+body {
+    padding-top: 70px;
+}
+
+#email-config > table > tbody > tr:nth-child(1) > td:nth-child(3)
+{
+    width: 100px;
+}
+
+#email-config > table > tbody > tr:nth-child(1) > td:nth-child(2)
+{
+    width: 100px;
+}

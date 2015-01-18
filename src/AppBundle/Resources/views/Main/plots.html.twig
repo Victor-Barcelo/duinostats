@@ -1,0 +1,47 @@
+{% extends 'AppBundle:Main:layout.html.twig' %}
+
+{% block title %}DuinoStats: Gráficas{% endblock %}
+
+{% block head %}
+<script src="//code.highcharts.com/4.0.1/highcharts.js"></script>
+<script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script>
+<link href="{{ asset( 'bundles/app/css/plots.css') }} " type="text/css" rel="stylesheet "/>
+<script src="{{ asset('bundles/app/js/plots.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+
+    <div style="max-width: 900px;" class="center-block">
+        <div class="container-fluid main-section">
+
+            <script type="text/javascript">
+                {{ chart(tempChart) }}
+                {{ chart(lightChart) }}
+            </script>
+
+            <div class="row">
+                <div class="col-md-12 main">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Registro de temperatura</div>
+                        <div class="panel-body">
+                            <div id="tempChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 main">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Registro de luminosidad</div>
+                        <div class="panel-body">
+                            <div id="lightChart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
